@@ -1,4 +1,4 @@
-from cdj_minecraft.minecraft import Bot, waneer
+from cdj_minecraft import Bot, waneer
 
 bot = Bot(naam="robot")
 
