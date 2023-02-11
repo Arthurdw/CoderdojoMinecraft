@@ -11,7 +11,7 @@ pathfinder = require("mineflayer-pathfinder").pathfinder
 DEFAULT_CONFIG = {
     "naam": "MinecraftBot",
     "server": "localhost",
-    "port": 25_565
+    "poort": 25_565
 }
 
 registered_events: dict[str, list[callable]] = {}
@@ -47,7 +47,7 @@ class Bot:
 
     @property
     def port(self):
-        return self.config["port"]
+        return self.config["poort"]
 
     def __register_event(self, event: str):
         On(self.bot, event)(lambda *args: self.__dispatch_event(event, *args))

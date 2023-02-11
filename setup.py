@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-version = 'v0.0.3'
+version = 'v0.0.4'
 
 setup(
     name='cdj_minecraft',
