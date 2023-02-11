@@ -29,7 +29,7 @@ def on_event(event: str):
     return decorator
 
 
-waneer = on_event
+wanneer = on_event
 
 
 class Bot:

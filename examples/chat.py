@@ -1,20 +1,22 @@
-from cdj_minecraft import Bot, waneer
+from cdj_minecraft import Bot, wanneer
 
-bot = Bot(naam="robot")
+bot = Bot(naam="albert", server="localhost")
 
 
-@waneer("bericht")
-def bericht(gebruikersnaam: str, message: str):
+@wanneer("bericht")
+def bericht(gebruikersnaam: str, bericht: str):
+    # We willen niet dat de robot antwoord op zijn eigen berichten.
     if gebruikersnaam == bot.naam:
         return
 
-    print(f"{gebruikersnaam}: {message}")
+    print(f"{gebruikersnaam}: {bericht}")
 
-    if message.strip().lower() == "hallo":
+
+    if bericht.strip().lower() == "hallo":
         bot.zeg(f"Hallo {gebruikersnaam}!")
 
 
-@waneer("login")
+@wanneer("login")
 def login():
     print(f"Ingelogd op {bot.server} als {bot.naam}.")
     bot.zeg(f"Hallo, ik ben {bot.naam}!")
