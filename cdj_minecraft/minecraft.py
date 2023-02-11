@@ -46,7 +46,7 @@ class Bot:
         return self.config["server"]
 
     @property
-    def port(self):
+    def poort(self):
         return self.config["poort"]
 
     def __register_event(self, event: str):
@@ -83,9 +83,9 @@ class Bot:
 
     def start(self):
         self.bot = mineflayer.createBot({
-            "host": self.config["server"],
-            "port": self.config["port"],
-            "username": self.config["naam"],
+            "host": self.server,
+            "port": self.poort,
+            "username": self.naam
         })
         self.bot.loadPlugin(pathfinder)
         any(self.__register_event(event) for event in registered_events)
