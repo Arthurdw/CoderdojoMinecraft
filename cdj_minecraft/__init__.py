@@ -1,1 +1,1 @@
-from .minecraft import Bot, waneer
+from .minecraft import Bot, wanneer

@@ -11,7 +11,6 @@ def bericht(gebruikersnaam: str, bericht: str):
 
     print(f"{gebruikersnaam}: {bericht}")
 
-
     if bericht.strip().lower() == "hallo":
         bot.zeg(f"Hallo {gebruikersnaam}!")
 
