@@ -18,7 +18,6 @@ def bericht(gebruikersnaam: str, message: str):
 def login():
     print(f"Ingelogd op {bot.server} als {bot.naam}.")
     bot.zeg(f"Hallo, ik ben {bot.naam}!")
-    raise RuntimeError("Test")
 
 
 bot.start()
