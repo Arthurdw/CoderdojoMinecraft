@@ -1,3 +1,4 @@
+import traceback
 from inspect import signature
 
 from javascript import require, On
@@ -49,7 +50,7 @@ class Bot:
         return self.config["port"]
 
     def __register_event(self, event: str):
-        On(self.bot, event)(lambda *args: self.__handle_event(event, *args))
+        On(self.bot, event)(lambda *args: self.__dispatch_event(event, *args))
 
     @staticmethod
     def __handle_event(event: str, *args):
@@ -57,12 +58,28 @@ class Bot:
             for func in registered_events[event]:
                 amount_of_params = len(signature(func).parameters)
                 if amount_of_params == 0 or len(args) == 0:
-                    func()
+                    return func()
                 elif len(args) >= amount_of_params + 1:
-                    func(*args[1:amount_of_params + 1])
-                else:
-                    raise RuntimeError(
-                        f"Event '{event}' heeft '{amount_of_params}' parameters, maar er zijn er maar '{len(args)}' gegeven.")
+                    return func(*args[1:amount_of_params + 1])
+
+                raise RuntimeError(
+                    f"Event '{event}' heeft '{amount_of_params}' parameters, "
+                    f"maar er zijn er maar '{len(args)}' gegeven."
+                )
+
+    def __dispatch_event(self, event: str, *args):
+        try:
+            self.__handle_event(event, *args)
+        except Exception as e:
+            def format_arg(arg):
+                representation = repr(arg)
+
+                if len(representation) > 20:
+                    representation = f"{representation[:17]}..."
+
+                return representation
+
+            print(f"Error in {repr(event)} (args: {repr([format_arg(arg) for arg in args])})", traceback.format_exc())
 
     def start(self):
         self.bot = mineflayer.createBot({
